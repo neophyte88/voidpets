@@ -1,6 +1,9 @@
-# voidpets
+# VOIDPETS / OPENPETS
 
-A new Flutter project.
+VoidPets (Open Pets) is a local first pet record management app built using flutter
+The goal here is to have an app that does not require cloud/account and can store pet records on the users device for vet visits / security checks etc.
+
+Eventually the plan is to have a google drive backup mechanism so that users can back up their pet data onto their own account.
 
 ## Getting Started
 
