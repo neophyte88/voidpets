@@ -5,7 +5,9 @@ The goal here is to have an app that does not require cloud/account and can stor
 
 Eventually the plan is to have a google drive backup mechanism so that users can back up their pet data onto their own account.
 
-## Getting Started
+The actual plan is just to code without AI/autocomplete and understand how flutter works
+
+## Getting Started With Flutter
 
 This project is a starting point for a Flutter application.
 
