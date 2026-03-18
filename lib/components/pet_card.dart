@@ -24,7 +24,7 @@ class PetCard extends StatelessWidget {
                 onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PetDetail()),
+            MaterialPageRoute(builder: (context) => PetDetail(pet_id: pet_id)),
             );
         },
               child: Padding(

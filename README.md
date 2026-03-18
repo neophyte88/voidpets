@@ -5,7 +5,11 @@ The goal here is to have an app that does not require cloud/account and can stor
 
 Eventually the plan is to have a google drive backup mechanism so that users can back up their pet data onto their own account.
 
-The actual plan is just to code without AI/autocomplete and understand how flutter works
+The actual plan is just to code without ~~AI~~/autocomplete and understand how flutter works
+
+UPDATE: 19/03/26 02:58
+AI is now striked through cause I had this weird error with pet detail and spent an hour trying to debug, 
+AI allowed now(only when head hurts), we're trying to learn here
 
 ## Getting Started With Flutter
 
