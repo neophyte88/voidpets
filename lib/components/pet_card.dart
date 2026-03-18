@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:voidpets/pet_detail.dart';
+import 'package:voidpets/screens/pet_detail.dart';
 
 class PetCard extends StatelessWidget {
   const PetCard(this.pet_name, this.pet_age, this.pet_type, this.pet_id, {super.key});

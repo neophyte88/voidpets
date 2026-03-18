@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:voidpets/pet_card.dart';
-import 'package:voidpets/add_pet.dart';
-import 'package:voidpets/pet_detail.dart';
+import 'package:voidpets/components/pet_card.dart';
+import 'package:voidpets/screens/add_pet.dart';
+import 'package:voidpets/screens/pet_detail.dart';
 
 
 class Home extends StatefulWidget {
