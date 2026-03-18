@@ -1,12 +1,17 @@
+// Main
+import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+// Screens
 import 'package:voidpets/screens/pet_detail.dart';
+
 
 class PetCard extends StatelessWidget {
   const PetCard(this.pet_name, this.pet_age, this.pet_type, this.pet_id, this.pet_breed, {super.key});
 
   final String pet_name;
-  final int pet_age;
+  final DateDuration pet_age;
   final String pet_type;
   final int pet_id;
   final String pet_breed;
@@ -44,7 +49,7 @@ class PetCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 1),
                     Text("$pet_type - $pet_breed", style: TextStyle(fontSize: 15, color: Color(0xFF211C20))),
-                    Text("Age: ${pet_age}"),
+                    Text("Age: ${pet_age.years} Y, ${pet_age.months} M"),
                   ],
                 ),
               ),

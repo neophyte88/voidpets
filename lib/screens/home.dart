@@ -12,6 +12,8 @@ import 'package:voidpets/screens/pet_detail.dart';
 // Database
 import 'package:voidpets/database/database.dart';
 
+// Helpers
+import 'package:voidpets/helpers/utils.dart';
 
 
 class Home extends StatefulWidget {
@@ -76,8 +78,8 @@ class _HomeState extends State<Home> {
         itemCount: pets.length,
         itemBuilder: (context, index) {
           final pet = pets[index];
-// will add proper age later (-_-)
-          return PetCard(pet.name, 10, pet.type, pet.id, pet.breed);
+          final pet_age = getAge(pet.dob);
+          return PetCard(pet.name, pet_age, pet.type, pet.id, pet.breed);
 
         },
       ),
