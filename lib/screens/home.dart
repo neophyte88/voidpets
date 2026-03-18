@@ -1,8 +1,17 @@
+// Main
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+// Components
 import 'package:voidpets/components/pet_card.dart';
+
+// Screens
 import 'package:voidpets/screens/add_pet.dart';
 import 'package:voidpets/screens/pet_detail.dart';
+
+// Database
+import 'package:voidpets/database/database.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -13,20 +22,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Map<String, dynamic>> pets = [
-    {'id': 1, 'name': 'Yukioooooaosdosodsod', 'type': 'cat', 'age': 1},
-    {'id': 2, 'name': 'Bob', 'type': 'dog', 'age': 2},
-    {'id': 3, 'name': 'Whiskers', 'type': 'cat', 'age': 3},
-    {'id': 4, 'name': 'Rex', 'type': 'dog', 'age': 5},
-    {'id': 5, 'name': 'Mittens', 'type': 'cat', 'age': 1},
-    {'id': 6, 'name': 'Whiskers', 'type': 'cat', 'age': 3},
-    {'id': 7, 'name': 'Rex', 'type': 'dog', 'age': 5},
-    {'id': 8, 'name': 'Mittens', 'type': 'cat', 'age': 1},
-    {'id': 9, 'name': 'Rex', 'type': 'dog', 'age': 5},
-    {'id': 10, 'name': 'Mittens', 'type': 'cat', 'age': 1},
-    {'id': 11, 'name': 'Rex', 'type': 'dog', 'age': 5},
-    {'id': 12, 'name': 'Mittens', 'type': 'cat', 'age': 1}
-  ];
+
+  final database = AppDatabase();
+
+  late List<PetData> pets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getAllPets();
+    print('PETS $pets');
+  }
+
+  Future<void> getAllPets() async {
+    List<PetData> allpets = await database.select(database.pet).get();
+    setState(() {
+      pets = allpets;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +54,13 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         // backgroundColor: const Color(0xFF00A6A6),
         // foregroundColor: const Color(0xFF2B2528),
-        onPressed: () {
-          // Define the action when the button is pressed
+        onPressed: () async {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddPet()),
-            );
+            ).then((_) {
+              getAllPets();
+            });
         },
         tooltip: 'Add a pet', // Optional tooltip for accessibility
         child: const Icon(Icons.pets), // The icon displayed in the button
@@ -62,8 +76,8 @@ class _HomeState extends State<Home> {
         itemCount: pets.length,
         itemBuilder: (context, index) {
           final pet = pets[index];
-
-          return PetCard(pet["name"], pet["age"], pet["type"], pet["id"] );
+// will add proper age later (-_-)
+          return PetCard(pet.name, 10, pet.type, pet.id, pet.breed);
 
         },
       ),

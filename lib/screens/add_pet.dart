@@ -1,5 +1,13 @@
+// Main
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+// Components
+
+// Screens
+
+// Database
+import 'package:voidpets/database/database.dart';
 
 class AddPet extends StatefulWidget {
   const AddPet({super.key});
@@ -9,6 +17,7 @@ class AddPet extends StatefulWidget {
 }
 
 class _AddPetState extends State<AddPet> {
+  final database = AppDatabase();
   final _form_global_key = GlobalKey<FormState>();
 
   String new_pet_type = "Cat";
@@ -27,7 +36,7 @@ class _AddPetState extends State<AddPet> {
       "Good Boy": "Good Boy",
       "Good Girl": "Good Girl",
       "Satan": "Satan",
-      "Blob": "Blob"
+      "Blob": "Blob",
     },
     "Dog": {
       "Generic": "Generic",
@@ -37,14 +46,26 @@ class _AddPetState extends State<AddPet> {
       "Good Boy": "Good Boy",
       "Good Girl": "Good Girl",
       "Satan": "Satan",
-      "Blob": "Blob"
+      "Blob": "Blob",
     },
-    "-":
-    {
-      "Choose an Option": "Choose an Option"
-    } 
+    "-": {"Choose an Option": "Choose an Option"},
   };
 
+  Future<void> addPet() async {
+    await database
+        .into(database.pet)
+        .insert(
+          PetCompanion.insert(
+            name: new_pet_name,
+            type: new_pet_type,
+            breed: new_pet_breed,
+            gender: new_pet_gender,
+            dob: new_pet_dob,
+            owner_name: new_pet_owner_name,
+            owner_contact: new_pet_owner_name,
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +112,10 @@ class _AddPetState extends State<AddPet> {
 
                 // ],
                 items: (breeds[new_pet_type] ?? {}).entries.map((entry) {
-                  return DropdownMenuItem(value: entry.key.toString(), child: Text(entry.value));
+                  return DropdownMenuItem(
+                    value: entry.key.toString(),
+                    child: Text(entry.value),
+                  );
                 }).toList(),
 
                 onChanged: (value) {
@@ -147,7 +171,7 @@ class _AddPetState extends State<AddPet> {
                   new_pet_owner_name = value!;
                 },
               ),
-              
+
               // Owner Contact
               TextFormField(
                 maxLength: 10,
@@ -164,11 +188,38 @@ class _AddPetState extends State<AddPet> {
               Center(
                 child: FilledButton.tonal(
                   onPressed: () {
-                    // TODO add this data to the db, theres no other way to do it sadly
-                    print("Submit pressed!");
                     _form_global_key.currentState!.save();
-                    print(new_pet_owner_contact);
+                    addPet();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Icon(FontAwesomeIcons.checkDouble),
+                          content: const Text(
+                            'Pet Added Successfully',
+                            textAlign: TextAlign.center,
+                          ),
+                          actionsAlignment: MainAxisAlignment.center,
+                          actions: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    Color(0xFF00A6A6), // Text and icon color
+                                foregroundColor:
+                                    Colors.grey[200], // Optional background
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pop(context);
 
+                              },
+                                   // Closes the dialog
+                              child: const Text('YAY!'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.all(15),
