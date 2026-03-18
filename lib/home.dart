@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:voidpets/pet_card.dart';
 import 'package:voidpets/add_pet.dart';
+import 'package:voidpets/pet_detail.dart';
 
 
 class Home extends StatefulWidget {
@@ -31,14 +32,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("<VoidPets>"),
-        backgroundColor: const Color(0xFF00D9C0),
+        title: const Text("VoidPets"),
+        backgroundColor: const Color(0xFF5A4E57),
+        foregroundColor: Color(0xFFFFFFF3),
         centerTitle: true,
       ),
+      backgroundColor: Color(0XFFEDE1D4),
       floatingActionButton: FloatingActionButton(
+        // backgroundColor: const Color(0xFF00A6A6),
+        // foregroundColor: const Color(0xFF2B2528),
         onPressed: () {
           // Define the action when the button is pressed
-          print('Button pressed!');
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddPet()),
