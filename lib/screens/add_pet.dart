@@ -1,4 +1,5 @@
 // Main
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -85,6 +86,17 @@ class _AddPetState extends State<AddPet> {
             mainAxisAlignment: MainAxisAlignment.start,
             spacing: 20,
             children: [
+              // Name
+              TextFormField(
+                // maxLength: 50,
+                decoration: const InputDecoration(
+                  labelText: "Name",
+                  border: OutlineInputBorder(),
+                ),
+                onSaved: (value) {
+                  new_pet_name = value!;
+                },
+              ),
               // Type
               DropdownButtonFormField(
                 initialValue: new_pet_type,
@@ -103,14 +115,6 @@ class _AddPetState extends State<AddPet> {
               DropdownButtonFormField(
                 initialValue: new_pet_breed,
                 decoration: InputDecoration(labelText: "Breed"),
-                // items: [
-                //   DropdownMenuItem(value: "Generic", child: Text("Generic")),
-                //   DropdownMenuItem(value: "Calico", child: Text("Calico")),
-                //   DropdownMenuItem(value: "Satan", child: Text("Satan")),
-                //   DropdownMenuItem(value: "Good_Boy", child: Text("Good Boy")),
-                //   DropdownMenuItem(value: "Good_Girl", child: Text("Good Girl")),
-
-                // ],
                 items: (breeds[new_pet_type] ?? {}).entries.map((entry) {
                   return DropdownMenuItem(
                     value: entry.key.toString(),
@@ -138,26 +142,16 @@ class _AddPetState extends State<AddPet> {
                   });
                 },
               ),
-              // Name
-              TextFormField(
-                // maxLength: 50,
-                decoration: const InputDecoration(
-                  labelText: "Name",
-                  border: OutlineInputBorder(),
-                ),
-                onSaved: (value) {
-                  new_pet_name = value!;
-                },
-              ),
 
               // DOB
-              InputDatePickerFormField(
-                firstDate: DateTime(1950),
-                lastDate: DateTime.now(),
-                fieldHintText: "Date of Birth",
-                fieldLabelText: "DoB",
-                onDateSaved: (value) {
-                  new_pet_dob = value;
+              DateTimeFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Date of Birth',
+                ),
+                mode: DateTimeFieldPickerMode.date,
+                initialPickerDateTime: DateTime.now(),
+                onChanged: (value) {
+                  new_pet_dob = value!;
                 },
               ),
               // Owner Name
@@ -175,6 +169,7 @@ class _AddPetState extends State<AddPet> {
               // Owner Contact
               TextFormField(
                 maxLength: 10,
+                keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
                   labelText: "Owner Contact Number",
                   border: OutlineInputBorder(),

@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
         tooltip: 'Add a pet', // Optional tooltip for accessibility
         child: const Icon(Icons.pets), // The icon displayed in the button
       ),
-      body: GridView.builder(
+      body: pets.isNotEmpty ? GridView.builder(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 cards per row
@@ -82,7 +82,17 @@ class _HomeState extends State<Home> {
           return PetCard(pet.name, pet_age, pet.type, pet.id, pet.breed);
 
         },
-      ),
+      ): 
+      Center(child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 10,
+        children: [
+          Text("No Pets", style: const TextStyle(fontSize: 18, color: Color(0xFF211C20)),),
+          Icon(FontAwesomeIcons.faceSadCry, size: 30,),
+          Text("Go adopt a cat right meow!",style: const TextStyle(fontSize: 18, color: Color(0xFF211C20)),),
+
+        ],
+      )),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Components
+import 'package:voidpets/components/pet_info_container.dart';
 
 // Screens
 
@@ -64,24 +65,27 @@ class _PetDetailState extends State<PetDetail> {
           padding: EdgeInsets.all(40),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 20,
+              spacing: 15,
               children: [
-                Icon(pet_data.type == "Cat" ? FontAwesomeIcons.cat : FontAwesomeIcons.dog, size: 60),
-                Text(pet_data.name, style: TextStyle(fontSize: 30)),
-                Text(
-                  "Breed: ${pet_data.breed}",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "Gender: ${pet_data.gender}",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "Age: ${pet_age.years} years, ${pet_age.months} months and ${pet_age.days} days",
-                  style: TextStyle(fontSize: 20),
-                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: pet_data.gender == "Female" ? Color(0xFFF4A6A6) : Color(0xFFA8DADC),
+                    child: Icon(pet_data.type == "Cat" ? FontAwesomeIcons.cat : FontAwesomeIcons.dog, size: 50)
+                    )
+                  ),
+                PetInfoContainer("Name:", pet_data.name),
+                PetInfoContainer("Breed:", pet_data.breed),
+                PetInfoContainer("Gender:", pet_data.gender),
+                PetInfoContainer("Age:", "${pet_age.years}Y ${pet_age.months}M ${pet_age.days}D"),
+                PetInfoContainer("DoB:", "${pet_data.dob.day}/${pet_data.dob.month}/${pet_data.dob.year}"),
+                FilledButton(onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.book), Text("Records")],)),
+                FilledButton(onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.pencil), Text("Edit Pet")],)),
+                FilledButton(style: FilledButton.styleFrom(backgroundColor: Color(0xFFFF4A47)), onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.trash), Text("Delete Pet")],)),
+
                 // Text("Bio: Yuki is a spawn of the devil himself", style: TextStyle(fontSize: 15)),
               ],
             ),
