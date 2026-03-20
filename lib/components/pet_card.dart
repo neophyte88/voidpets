@@ -6,9 +6,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // Screens
 import 'package:voidpets/screens/pet_detail.dart';
 
-
 class PetCard extends StatelessWidget {
-  const PetCard(this.pet_name, this.pet_age, this.pet_type, this.pet_id, this.pet_breed, {super.key});
+  const PetCard(
+    this.pet_name,
+    this.pet_age,
+    this.pet_type,
+    this.pet_id,
+    this.pet_breed, {
+    super.key,
+  });
 
   final String pet_name;
   final DateDuration pet_age;
@@ -19,42 +25,47 @@ class PetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card.outlined(
-            color: const Color(0XFFECE9EB),
-            child: InkWell(
-                onTap: () {
+      color: const Color(0XFFECE9EB),
+      child: InkWell(
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => PetDetail(pet_id: pet_id)),
-            );
+          );
         },
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: Icon(
-                        pet_type == "Cat" ? FontAwesomeIcons.cat : FontAwesomeIcons.dog,
-                        size: 40, color: Color(0xFF211C20),
-                      ),
-                    ),
-
-                    Text(
-                      pet_name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 18, color: Color(0xFF211C20)),
-                      
-                    ),
-                    const SizedBox(height: 1),
-                    Text("$pet_type - $pet_breed", style: TextStyle(fontSize: 15, color: Color(0xFF211C20))),
-                    Text("Age: ${pet_age.years} Y, ${pet_age.months} M"),
-                  ],
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Icon(
+                  pet_type == "Cat"
+                      ? FontAwesomeIcons.cat
+                      : FontAwesomeIcons.dog,
+                  size: 40,
+                  color: Color(0xFF211C20),
                 ),
               ),
-            ),
-          );
+
+              Text(
+                pet_name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 18, color: Color(0xFF211C20)),
+              ),
+              const SizedBox(height: 1),
+              Text(
+                "$pet_type - $pet_breed",
+                style: TextStyle(fontSize: 15, color: Color(0xFF211C20)),
+              ),
+              Text("Age: ${pet_age.years} Y, ${pet_age.months} M"),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

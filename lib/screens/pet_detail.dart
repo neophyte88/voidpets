@@ -73,18 +73,58 @@ class _PetDetailState extends State<PetDetail> {
                   padding: EdgeInsets.only(bottom: 30),
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundColor: pet_data.gender == "Female" ? Color(0xFFF4A6A6) : Color(0xFFA8DADC),
-                    child: Icon(pet_data.type == "Cat" ? FontAwesomeIcons.cat : FontAwesomeIcons.dog, size: 50)
-                    )
+                    backgroundColor: pet_data.gender == "Female"
+                        ? Color(0xFFF4A6A6)
+                        : Color(0xFFA8DADC),
+                    child: Icon(
+                      pet_data.type == "Cat"
+                          ? FontAwesomeIcons.cat
+                          : FontAwesomeIcons.dog,
+                      size: 50,
+                    ),
                   ),
+                ),
                 PetInfoContainer("Name:", pet_data.name),
                 PetInfoContainer("Breed:", pet_data.breed),
                 PetInfoContainer("Gender:", pet_data.gender),
-                PetInfoContainer("Age:", "${pet_age.years}Y ${pet_age.months}M ${pet_age.days}D"),
-                PetInfoContainer("DoB:", "${pet_data.dob.day}/${pet_data.dob.month}/${pet_data.dob.year}"),
-                FilledButton(onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.book), Text("Records")],)),
-                FilledButton(onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.pencil), Text("Edit Pet")],)),
-                FilledButton(style: FilledButton.styleFrom(backgroundColor: Color(0xFFFF4A47)), onPressed: () {}, child: Row(mainAxisAlignment: MainAxisAlignment.center, spacing:5, children: [Icon(FontAwesomeIcons.trash), Text("Delete Pet")],)),
+                PetInfoContainer(
+                  "Age:",
+                  "${pet_age.years}Y ${pet_age.months}M ${pet_age.days}D",
+                ),
+                PetInfoContainer(
+                  "DoB:",
+                  "${pet_data.dob.day}/${pet_data.dob.month}/${pet_data.dob.year}",
+                ),
+                FilledButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 5,
+                    children: [Icon(FontAwesomeIcons.book), Text("Records")],
+                  ),
+                ),
+                FilledButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 5,
+                    children: [Icon(FontAwesomeIcons.pencil), Text("Edit Pet")],
+                  ),
+                ),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Color(0xFFFF4A47),
+                  ),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 5,
+                    children: [
+                      Icon(FontAwesomeIcons.trash),
+                      Text("Delete Pet"),
+                    ],
+                  ),
+                ),
 
                 // Text("Bio: Yuki is a spawn of the devil himself", style: TextStyle(fontSize: 15)),
               ],

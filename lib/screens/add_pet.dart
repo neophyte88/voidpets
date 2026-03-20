@@ -145,9 +145,7 @@ class _AddPetState extends State<AddPet> {
 
               // DOB
               DateTimeFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Date of Birth',
-                ),
+                decoration: const InputDecoration(labelText: 'Date of Birth'),
                 mode: DateTimeFieldPickerMode.date,
                 initialPickerDateTime: DateTime.now(),
                 onChanged: (value) {
@@ -198,17 +196,17 @@ class _AddPetState extends State<AddPet> {
                           actions: [
                             TextButton(
                               style: TextButton.styleFrom(
-                                backgroundColor:
-                                    Color(0xFF00A6A6), // Text and icon color
+                                backgroundColor: Color(
+                                  0xFF00A6A6,
+                                ), // Text and icon color
                                 foregroundColor:
                                     Colors.grey[200], // Optional background
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-
                               },
-                                   // Closes the dialog
+                              // Closes the dialog
                               child: const Text('YAY!'),
                             ),
                           ],
