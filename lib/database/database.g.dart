@@ -572,15 +572,829 @@ class PetCompanion extends UpdateCompanion<PetData> {
   }
 }
 
+class $PetRecordTable extends PetRecord
+    with TableInfo<$PetRecordTable, PetRecordData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PetRecordTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _petMeta = const VerificationMeta('pet');
+  @override
+  late final GeneratedColumn<int> pet = GeneratedColumn<int>(
+    'pet',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES pet (id)',
+    ),
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 100,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+    'type',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 100,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _subtypeMeta = const VerificationMeta(
+    'subtype',
+  );
+  @override
+  late final GeneratedColumn<String> subtype = GeneratedColumn<String>(
+    'subtype',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 100,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _detailsMeta = const VerificationMeta(
+    'details',
+  );
+  @override
+  late final GeneratedColumn<String> details = GeneratedColumn<String>(
+    'details',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _locationMeta = const VerificationMeta(
+    'location',
+  );
+  @override
+  late final GeneratedColumn<String> location = GeneratedColumn<String>(
+    'location',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 100,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    pet,
+    title,
+    type,
+    subtype,
+    details,
+    location,
+    date,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'pet_record';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PetRecordData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('pet')) {
+      context.handle(
+        _petMeta,
+        pet.isAcceptableOrUnknown(data['pet']!, _petMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_petMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+        _typeMeta,
+        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('subtype')) {
+      context.handle(
+        _subtypeMeta,
+        subtype.isAcceptableOrUnknown(data['subtype']!, _subtypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_subtypeMeta);
+    }
+    if (data.containsKey('details')) {
+      context.handle(
+        _detailsMeta,
+        details.isAcceptableOrUnknown(data['details']!, _detailsMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_detailsMeta);
+    }
+    if (data.containsKey('location')) {
+      context.handle(
+        _locationMeta,
+        location.isAcceptableOrUnknown(data['location']!, _locationMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_locationMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PetRecordData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PetRecordData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      pet: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pet'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+      subtype: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}subtype'],
+      )!,
+      details: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}details'],
+      )!,
+      location: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}location'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date'],
+      )!,
+    );
+  }
+
+  @override
+  $PetRecordTable createAlias(String alias) {
+    return $PetRecordTable(attachedDatabase, alias);
+  }
+}
+
+class PetRecordData extends DataClass implements Insertable<PetRecordData> {
+  final int id;
+  final int pet;
+  final String title;
+  final String type;
+  final String subtype;
+  final String details;
+  final String location;
+  final DateTime date;
+  const PetRecordData({
+    required this.id,
+    required this.pet,
+    required this.title,
+    required this.type,
+    required this.subtype,
+    required this.details,
+    required this.location,
+    required this.date,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['pet'] = Variable<int>(pet);
+    map['title'] = Variable<String>(title);
+    map['type'] = Variable<String>(type);
+    map['subtype'] = Variable<String>(subtype);
+    map['details'] = Variable<String>(details);
+    map['location'] = Variable<String>(location);
+    map['date'] = Variable<DateTime>(date);
+    return map;
+  }
+
+  PetRecordCompanion toCompanion(bool nullToAbsent) {
+    return PetRecordCompanion(
+      id: Value(id),
+      pet: Value(pet),
+      title: Value(title),
+      type: Value(type),
+      subtype: Value(subtype),
+      details: Value(details),
+      location: Value(location),
+      date: Value(date),
+    );
+  }
+
+  factory PetRecordData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PetRecordData(
+      id: serializer.fromJson<int>(json['id']),
+      pet: serializer.fromJson<int>(json['pet']),
+      title: serializer.fromJson<String>(json['title']),
+      type: serializer.fromJson<String>(json['type']),
+      subtype: serializer.fromJson<String>(json['subtype']),
+      details: serializer.fromJson<String>(json['details']),
+      location: serializer.fromJson<String>(json['location']),
+      date: serializer.fromJson<DateTime>(json['date']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'pet': serializer.toJson<int>(pet),
+      'title': serializer.toJson<String>(title),
+      'type': serializer.toJson<String>(type),
+      'subtype': serializer.toJson<String>(subtype),
+      'details': serializer.toJson<String>(details),
+      'location': serializer.toJson<String>(location),
+      'date': serializer.toJson<DateTime>(date),
+    };
+  }
+
+  PetRecordData copyWith({
+    int? id,
+    int? pet,
+    String? title,
+    String? type,
+    String? subtype,
+    String? details,
+    String? location,
+    DateTime? date,
+  }) => PetRecordData(
+    id: id ?? this.id,
+    pet: pet ?? this.pet,
+    title: title ?? this.title,
+    type: type ?? this.type,
+    subtype: subtype ?? this.subtype,
+    details: details ?? this.details,
+    location: location ?? this.location,
+    date: date ?? this.date,
+  );
+  PetRecordData copyWithCompanion(PetRecordCompanion data) {
+    return PetRecordData(
+      id: data.id.present ? data.id.value : this.id,
+      pet: data.pet.present ? data.pet.value : this.pet,
+      title: data.title.present ? data.title.value : this.title,
+      type: data.type.present ? data.type.value : this.type,
+      subtype: data.subtype.present ? data.subtype.value : this.subtype,
+      details: data.details.present ? data.details.value : this.details,
+      location: data.location.present ? data.location.value : this.location,
+      date: data.date.present ? data.date.value : this.date,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PetRecordData(')
+          ..write('id: $id, ')
+          ..write('pet: $pet, ')
+          ..write('title: $title, ')
+          ..write('type: $type, ')
+          ..write('subtype: $subtype, ')
+          ..write('details: $details, ')
+          ..write('location: $location, ')
+          ..write('date: $date')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, pet, title, type, subtype, details, location, date);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PetRecordData &&
+          other.id == this.id &&
+          other.pet == this.pet &&
+          other.title == this.title &&
+          other.type == this.type &&
+          other.subtype == this.subtype &&
+          other.details == this.details &&
+          other.location == this.location &&
+          other.date == this.date);
+}
+
+class PetRecordCompanion extends UpdateCompanion<PetRecordData> {
+  final Value<int> id;
+  final Value<int> pet;
+  final Value<String> title;
+  final Value<String> type;
+  final Value<String> subtype;
+  final Value<String> details;
+  final Value<String> location;
+  final Value<DateTime> date;
+  const PetRecordCompanion({
+    this.id = const Value.absent(),
+    this.pet = const Value.absent(),
+    this.title = const Value.absent(),
+    this.type = const Value.absent(),
+    this.subtype = const Value.absent(),
+    this.details = const Value.absent(),
+    this.location = const Value.absent(),
+    this.date = const Value.absent(),
+  });
+  PetRecordCompanion.insert({
+    this.id = const Value.absent(),
+    required int pet,
+    required String title,
+    required String type,
+    required String subtype,
+    required String details,
+    required String location,
+    required DateTime date,
+  }) : pet = Value(pet),
+       title = Value(title),
+       type = Value(type),
+       subtype = Value(subtype),
+       details = Value(details),
+       location = Value(location),
+       date = Value(date);
+  static Insertable<PetRecordData> custom({
+    Expression<int>? id,
+    Expression<int>? pet,
+    Expression<String>? title,
+    Expression<String>? type,
+    Expression<String>? subtype,
+    Expression<String>? details,
+    Expression<String>? location,
+    Expression<DateTime>? date,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (pet != null) 'pet': pet,
+      if (title != null) 'title': title,
+      if (type != null) 'type': type,
+      if (subtype != null) 'subtype': subtype,
+      if (details != null) 'details': details,
+      if (location != null) 'location': location,
+      if (date != null) 'date': date,
+    });
+  }
+
+  PetRecordCompanion copyWith({
+    Value<int>? id,
+    Value<int>? pet,
+    Value<String>? title,
+    Value<String>? type,
+    Value<String>? subtype,
+    Value<String>? details,
+    Value<String>? location,
+    Value<DateTime>? date,
+  }) {
+    return PetRecordCompanion(
+      id: id ?? this.id,
+      pet: pet ?? this.pet,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      subtype: subtype ?? this.subtype,
+      details: details ?? this.details,
+      location: location ?? this.location,
+      date: date ?? this.date,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (pet.present) {
+      map['pet'] = Variable<int>(pet.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (subtype.present) {
+      map['subtype'] = Variable<String>(subtype.value);
+    }
+    if (details.present) {
+      map['details'] = Variable<String>(details.value);
+    }
+    if (location.present) {
+      map['location'] = Variable<String>(location.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PetRecordCompanion(')
+          ..write('id: $id, ')
+          ..write('pet: $pet, ')
+          ..write('title: $title, ')
+          ..write('type: $type, ')
+          ..write('subtype: $subtype, ')
+          ..write('details: $details, ')
+          ..write('location: $location, ')
+          ..write('date: $date')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $PetRecordFileTable extends PetRecordFile
+    with TableInfo<$PetRecordFileTable, PetRecordFileData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PetRecordFileTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _recordMeta = const VerificationMeta('record');
+  @override
+  late final GeneratedColumn<int> record = GeneratedColumn<int>(
+    'record',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES pet_record (id)',
+    ),
+  );
+  static const VerificationMeta _filePathMeta = const VerificationMeta(
+    'filePath',
+  );
+  @override
+  late final GeneratedColumn<String> filePath = GeneratedColumn<String>(
+    'file_path',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fileTypeMeta = const VerificationMeta(
+    'fileType',
+  );
+  @override
+  late final GeneratedColumn<String> fileType = GeneratedColumn<String>(
+    'file_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, record, filePath, fileType];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'pet_record_file';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PetRecordFileData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('record')) {
+      context.handle(
+        _recordMeta,
+        record.isAcceptableOrUnknown(data['record']!, _recordMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_recordMeta);
+    }
+    if (data.containsKey('file_path')) {
+      context.handle(
+        _filePathMeta,
+        filePath.isAcceptableOrUnknown(data['file_path']!, _filePathMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_filePathMeta);
+    }
+    if (data.containsKey('file_type')) {
+      context.handle(
+        _fileTypeMeta,
+        fileType.isAcceptableOrUnknown(data['file_type']!, _fileTypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fileTypeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PetRecordFileData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PetRecordFileData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      record: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}record'],
+      )!,
+      filePath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}file_path'],
+      )!,
+      fileType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}file_type'],
+      )!,
+    );
+  }
+
+  @override
+  $PetRecordFileTable createAlias(String alias) {
+    return $PetRecordFileTable(attachedDatabase, alias);
+  }
+}
+
+class PetRecordFileData extends DataClass
+    implements Insertable<PetRecordFileData> {
+  final int id;
+  final int record;
+  final String filePath;
+  final String fileType;
+  const PetRecordFileData({
+    required this.id,
+    required this.record,
+    required this.filePath,
+    required this.fileType,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['record'] = Variable<int>(record);
+    map['file_path'] = Variable<String>(filePath);
+    map['file_type'] = Variable<String>(fileType);
+    return map;
+  }
+
+  PetRecordFileCompanion toCompanion(bool nullToAbsent) {
+    return PetRecordFileCompanion(
+      id: Value(id),
+      record: Value(record),
+      filePath: Value(filePath),
+      fileType: Value(fileType),
+    );
+  }
+
+  factory PetRecordFileData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PetRecordFileData(
+      id: serializer.fromJson<int>(json['id']),
+      record: serializer.fromJson<int>(json['record']),
+      filePath: serializer.fromJson<String>(json['filePath']),
+      fileType: serializer.fromJson<String>(json['fileType']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'record': serializer.toJson<int>(record),
+      'filePath': serializer.toJson<String>(filePath),
+      'fileType': serializer.toJson<String>(fileType),
+    };
+  }
+
+  PetRecordFileData copyWith({
+    int? id,
+    int? record,
+    String? filePath,
+    String? fileType,
+  }) => PetRecordFileData(
+    id: id ?? this.id,
+    record: record ?? this.record,
+    filePath: filePath ?? this.filePath,
+    fileType: fileType ?? this.fileType,
+  );
+  PetRecordFileData copyWithCompanion(PetRecordFileCompanion data) {
+    return PetRecordFileData(
+      id: data.id.present ? data.id.value : this.id,
+      record: data.record.present ? data.record.value : this.record,
+      filePath: data.filePath.present ? data.filePath.value : this.filePath,
+      fileType: data.fileType.present ? data.fileType.value : this.fileType,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PetRecordFileData(')
+          ..write('id: $id, ')
+          ..write('record: $record, ')
+          ..write('filePath: $filePath, ')
+          ..write('fileType: $fileType')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, record, filePath, fileType);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PetRecordFileData &&
+          other.id == this.id &&
+          other.record == this.record &&
+          other.filePath == this.filePath &&
+          other.fileType == this.fileType);
+}
+
+class PetRecordFileCompanion extends UpdateCompanion<PetRecordFileData> {
+  final Value<int> id;
+  final Value<int> record;
+  final Value<String> filePath;
+  final Value<String> fileType;
+  const PetRecordFileCompanion({
+    this.id = const Value.absent(),
+    this.record = const Value.absent(),
+    this.filePath = const Value.absent(),
+    this.fileType = const Value.absent(),
+  });
+  PetRecordFileCompanion.insert({
+    this.id = const Value.absent(),
+    required int record,
+    required String filePath,
+    required String fileType,
+  }) : record = Value(record),
+       filePath = Value(filePath),
+       fileType = Value(fileType);
+  static Insertable<PetRecordFileData> custom({
+    Expression<int>? id,
+    Expression<int>? record,
+    Expression<String>? filePath,
+    Expression<String>? fileType,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (record != null) 'record': record,
+      if (filePath != null) 'file_path': filePath,
+      if (fileType != null) 'file_type': fileType,
+    });
+  }
+
+  PetRecordFileCompanion copyWith({
+    Value<int>? id,
+    Value<int>? record,
+    Value<String>? filePath,
+    Value<String>? fileType,
+  }) {
+    return PetRecordFileCompanion(
+      id: id ?? this.id,
+      record: record ?? this.record,
+      filePath: filePath ?? this.filePath,
+      fileType: fileType ?? this.fileType,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (record.present) {
+      map['record'] = Variable<int>(record.value);
+    }
+    if (filePath.present) {
+      map['file_path'] = Variable<String>(filePath.value);
+    }
+    if (fileType.present) {
+      map['file_type'] = Variable<String>(fileType.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PetRecordFileCompanion(')
+          ..write('id: $id, ')
+          ..write('record: $record, ')
+          ..write('filePath: $filePath, ')
+          ..write('fileType: $fileType')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $PetTable pet = $PetTable(this);
+  late final $PetRecordTable petRecord = $PetRecordTable(this);
+  late final $PetRecordFileTable petRecordFile = $PetRecordFileTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [pet];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+    pet,
+    petRecord,
+    petRecordFile,
+  ];
 }
 
 typedef $$PetTableCreateCompanionBuilder =
@@ -607,6 +1421,29 @@ typedef $$PetTableUpdateCompanionBuilder =
       Value<String> owner_name,
       Value<String> owner_contact,
     });
+
+final class $$PetTableReferences
+    extends BaseReferences<_$AppDatabase, $PetTable, PetData> {
+  $$PetTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$PetRecordTable, List<PetRecordData>>
+  _petRecordRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.petRecord,
+    aliasName: $_aliasNameGenerator(db.pet.id, db.petRecord.pet),
+  );
+
+  $$PetRecordTableProcessedTableManager get petRecordRefs {
+    final manager = $$PetRecordTableTableManager(
+      $_db,
+      $_db.petRecord,
+    ).filter((f) => f.pet.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_petRecordRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
 
 class $$PetTableFilterComposer extends Composer<_$AppDatabase, $PetTable> {
   $$PetTableFilterComposer({
@@ -660,6 +1497,31 @@ class $$PetTableFilterComposer extends Composer<_$AppDatabase, $PetTable> {
     column: $table.owner_contact,
     builder: (column) => ColumnFilters(column),
   );
+
+  Expression<bool> petRecordRefs(
+    Expression<bool> Function($$PetRecordTableFilterComposer f) f,
+  ) {
+    final $$PetRecordTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.petRecord,
+      getReferencedColumn: (t) => t.pet,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordTableFilterComposer(
+            $db: $db,
+            $table: $db.petRecord,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$PetTableOrderingComposer extends Composer<_$AppDatabase, $PetTable> {
@@ -754,6 +1616,31 @@ class $$PetTableAnnotationComposer extends Composer<_$AppDatabase, $PetTable> {
     column: $table.owner_contact,
     builder: (column) => column,
   );
+
+  Expression<T> petRecordRefs<T extends Object>(
+    Expression<T> Function($$PetRecordTableAnnotationComposer a) f,
+  ) {
+    final $$PetRecordTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.petRecord,
+      getReferencedColumn: (t) => t.pet,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordTableAnnotationComposer(
+            $db: $db,
+            $table: $db.petRecord,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$PetTableTableManager
@@ -767,9 +1654,9 @@ class $$PetTableTableManager
           $$PetTableAnnotationComposer,
           $$PetTableCreateCompanionBuilder,
           $$PetTableUpdateCompanionBuilder,
-          (PetData, BaseReferences<_$AppDatabase, $PetTable, PetData>),
+          (PetData, $$PetTableReferences),
           PetData,
-          PrefetchHooks Function()
+          PrefetchHooks Function({bool petRecordRefs})
         > {
   $$PetTableTableManager(_$AppDatabase db, $PetTable table)
     : super(
@@ -827,9 +1714,37 @@ class $$PetTableTableManager
                 owner_contact: owner_contact,
               ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map(
+                (e) => (e.readTable(table), $$PetTableReferences(db, table, e)),
+              )
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({petRecordRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (petRecordRefs) db.petRecord],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (petRecordRefs)
+                    await $_getPrefetchedData<
+                      PetData,
+                      $PetTable,
+                      PetRecordData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$PetTableReferences._petRecordRefsTable(
+                        db,
+                      ),
+                      managerFromTypedResult: (p0) =>
+                          $$PetTableReferences(db, table, p0).petRecordRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.pet == item.id),
+                      typedResults: items,
+                    ),
+                ];
+              },
+            );
+          },
         ),
       );
 }
@@ -844,13 +1759,774 @@ typedef $$PetTableProcessedTableManager =
       $$PetTableAnnotationComposer,
       $$PetTableCreateCompanionBuilder,
       $$PetTableUpdateCompanionBuilder,
-      (PetData, BaseReferences<_$AppDatabase, $PetTable, PetData>),
+      (PetData, $$PetTableReferences),
       PetData,
-      PrefetchHooks Function()
+      PrefetchHooks Function({bool petRecordRefs})
+    >;
+typedef $$PetRecordTableCreateCompanionBuilder =
+    PetRecordCompanion Function({
+      Value<int> id,
+      required int pet,
+      required String title,
+      required String type,
+      required String subtype,
+      required String details,
+      required String location,
+      required DateTime date,
+    });
+typedef $$PetRecordTableUpdateCompanionBuilder =
+    PetRecordCompanion Function({
+      Value<int> id,
+      Value<int> pet,
+      Value<String> title,
+      Value<String> type,
+      Value<String> subtype,
+      Value<String> details,
+      Value<String> location,
+      Value<DateTime> date,
+    });
+
+final class $$PetRecordTableReferences
+    extends BaseReferences<_$AppDatabase, $PetRecordTable, PetRecordData> {
+  $$PetRecordTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $PetTable _petTable(_$AppDatabase db) =>
+      db.pet.createAlias($_aliasNameGenerator(db.petRecord.pet, db.pet.id));
+
+  $$PetTableProcessedTableManager get pet {
+    final $_column = $_itemColumn<int>('pet')!;
+
+    final manager = $$PetTableTableManager(
+      $_db,
+      $_db.pet,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_petTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$PetRecordFileTable, List<PetRecordFileData>>
+  _petRecordFileRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.petRecordFile,
+    aliasName: $_aliasNameGenerator(db.petRecord.id, db.petRecordFile.record),
+  );
+
+  $$PetRecordFileTableProcessedTableManager get petRecordFileRefs {
+    final manager = $$PetRecordFileTableTableManager(
+      $_db,
+      $_db.petRecordFile,
+    ).filter((f) => f.record.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_petRecordFileRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$PetRecordTableFilterComposer
+    extends Composer<_$AppDatabase, $PetRecordTable> {
+  $$PetRecordTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get subtype => $composableBuilder(
+    column: $table.subtype,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get details => $composableBuilder(
+    column: $table.details,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get location => $composableBuilder(
+    column: $table.location,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$PetTableFilterComposer get pet {
+    final $$PetTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pet,
+      referencedTable: $db.pet,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetTableFilterComposer(
+            $db: $db,
+            $table: $db.pet,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> petRecordFileRefs(
+    Expression<bool> Function($$PetRecordFileTableFilterComposer f) f,
+  ) {
+    final $$PetRecordFileTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.petRecordFile,
+      getReferencedColumn: (t) => t.record,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordFileTableFilterComposer(
+            $db: $db,
+            $table: $db.petRecordFile,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$PetRecordTableOrderingComposer
+    extends Composer<_$AppDatabase, $PetRecordTable> {
+  $$PetRecordTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get subtype => $composableBuilder(
+    column: $table.subtype,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get details => $composableBuilder(
+    column: $table.details,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get location => $composableBuilder(
+    column: $table.location,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$PetTableOrderingComposer get pet {
+    final $$PetTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pet,
+      referencedTable: $db.pet,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetTableOrderingComposer(
+            $db: $db,
+            $table: $db.pet,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PetRecordTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PetRecordTable> {
+  $$PetRecordTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get subtype =>
+      $composableBuilder(column: $table.subtype, builder: (column) => column);
+
+  GeneratedColumn<String> get details =>
+      $composableBuilder(column: $table.details, builder: (column) => column);
+
+  GeneratedColumn<String> get location =>
+      $composableBuilder(column: $table.location, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  $$PetTableAnnotationComposer get pet {
+    final $$PetTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pet,
+      referencedTable: $db.pet,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetTableAnnotationComposer(
+            $db: $db,
+            $table: $db.pet,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> petRecordFileRefs<T extends Object>(
+    Expression<T> Function($$PetRecordFileTableAnnotationComposer a) f,
+  ) {
+    final $$PetRecordFileTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.petRecordFile,
+      getReferencedColumn: (t) => t.record,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordFileTableAnnotationComposer(
+            $db: $db,
+            $table: $db.petRecordFile,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$PetRecordTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $PetRecordTable,
+          PetRecordData,
+          $$PetRecordTableFilterComposer,
+          $$PetRecordTableOrderingComposer,
+          $$PetRecordTableAnnotationComposer,
+          $$PetRecordTableCreateCompanionBuilder,
+          $$PetRecordTableUpdateCompanionBuilder,
+          (PetRecordData, $$PetRecordTableReferences),
+          PetRecordData,
+          PrefetchHooks Function({bool pet, bool petRecordFileRefs})
+        > {
+  $$PetRecordTableTableManager(_$AppDatabase db, $PetRecordTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PetRecordTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PetRecordTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PetRecordTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> pet = const Value.absent(),
+                Value<String> title = const Value.absent(),
+                Value<String> type = const Value.absent(),
+                Value<String> subtype = const Value.absent(),
+                Value<String> details = const Value.absent(),
+                Value<String> location = const Value.absent(),
+                Value<DateTime> date = const Value.absent(),
+              }) => PetRecordCompanion(
+                id: id,
+                pet: pet,
+                title: title,
+                type: type,
+                subtype: subtype,
+                details: details,
+                location: location,
+                date: date,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int pet,
+                required String title,
+                required String type,
+                required String subtype,
+                required String details,
+                required String location,
+                required DateTime date,
+              }) => PetRecordCompanion.insert(
+                id: id,
+                pet: pet,
+                title: title,
+                type: type,
+                subtype: subtype,
+                details: details,
+                location: location,
+                date: date,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$PetRecordTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({pet = false, petRecordFileRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (petRecordFileRefs) db.petRecordFile,
+              ],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (pet) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.pet,
+                                referencedTable: $$PetRecordTableReferences
+                                    ._petTable(db),
+                                referencedColumn: $$PetRecordTableReferences
+                                    ._petTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (petRecordFileRefs)
+                    await $_getPrefetchedData<
+                      PetRecordData,
+                      $PetRecordTable,
+                      PetRecordFileData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$PetRecordTableReferences
+                          ._petRecordFileRefsTable(db),
+                      managerFromTypedResult: (p0) =>
+                          $$PetRecordTableReferences(
+                            db,
+                            table,
+                            p0,
+                          ).petRecordFileRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.record == item.id),
+                      typedResults: items,
+                    ),
+                ];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$PetRecordTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $PetRecordTable,
+      PetRecordData,
+      $$PetRecordTableFilterComposer,
+      $$PetRecordTableOrderingComposer,
+      $$PetRecordTableAnnotationComposer,
+      $$PetRecordTableCreateCompanionBuilder,
+      $$PetRecordTableUpdateCompanionBuilder,
+      (PetRecordData, $$PetRecordTableReferences),
+      PetRecordData,
+      PrefetchHooks Function({bool pet, bool petRecordFileRefs})
+    >;
+typedef $$PetRecordFileTableCreateCompanionBuilder =
+    PetRecordFileCompanion Function({
+      Value<int> id,
+      required int record,
+      required String filePath,
+      required String fileType,
+    });
+typedef $$PetRecordFileTableUpdateCompanionBuilder =
+    PetRecordFileCompanion Function({
+      Value<int> id,
+      Value<int> record,
+      Value<String> filePath,
+      Value<String> fileType,
+    });
+
+final class $$PetRecordFileTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $PetRecordFileTable, PetRecordFileData> {
+  $$PetRecordFileTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $PetRecordTable _recordTable(_$AppDatabase db) =>
+      db.petRecord.createAlias(
+        $_aliasNameGenerator(db.petRecordFile.record, db.petRecord.id),
+      );
+
+  $$PetRecordTableProcessedTableManager get record {
+    final $_column = $_itemColumn<int>('record')!;
+
+    final manager = $$PetRecordTableTableManager(
+      $_db,
+      $_db.petRecord,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_recordTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$PetRecordFileTableFilterComposer
+    extends Composer<_$AppDatabase, $PetRecordFileTable> {
+  $$PetRecordFileTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get fileType => $composableBuilder(
+    column: $table.fileType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$PetRecordTableFilterComposer get record {
+    final $$PetRecordTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.record,
+      referencedTable: $db.petRecord,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordTableFilterComposer(
+            $db: $db,
+            $table: $db.petRecord,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PetRecordFileTableOrderingComposer
+    extends Composer<_$AppDatabase, $PetRecordFileTable> {
+  $$PetRecordFileTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get fileType => $composableBuilder(
+    column: $table.fileType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$PetRecordTableOrderingComposer get record {
+    final $$PetRecordTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.record,
+      referencedTable: $db.petRecord,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordTableOrderingComposer(
+            $db: $db,
+            $table: $db.petRecord,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PetRecordFileTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PetRecordFileTable> {
+  $$PetRecordFileTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get filePath =>
+      $composableBuilder(column: $table.filePath, builder: (column) => column);
+
+  GeneratedColumn<String> get fileType =>
+      $composableBuilder(column: $table.fileType, builder: (column) => column);
+
+  $$PetRecordTableAnnotationComposer get record {
+    final $$PetRecordTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.record,
+      referencedTable: $db.petRecord,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PetRecordTableAnnotationComposer(
+            $db: $db,
+            $table: $db.petRecord,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$PetRecordFileTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $PetRecordFileTable,
+          PetRecordFileData,
+          $$PetRecordFileTableFilterComposer,
+          $$PetRecordFileTableOrderingComposer,
+          $$PetRecordFileTableAnnotationComposer,
+          $$PetRecordFileTableCreateCompanionBuilder,
+          $$PetRecordFileTableUpdateCompanionBuilder,
+          (PetRecordFileData, $$PetRecordFileTableReferences),
+          PetRecordFileData,
+          PrefetchHooks Function({bool record})
+        > {
+  $$PetRecordFileTableTableManager(_$AppDatabase db, $PetRecordFileTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PetRecordFileTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PetRecordFileTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PetRecordFileTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> record = const Value.absent(),
+                Value<String> filePath = const Value.absent(),
+                Value<String> fileType = const Value.absent(),
+              }) => PetRecordFileCompanion(
+                id: id,
+                record: record,
+                filePath: filePath,
+                fileType: fileType,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int record,
+                required String filePath,
+                required String fileType,
+              }) => PetRecordFileCompanion.insert(
+                id: id,
+                record: record,
+                filePath: filePath,
+                fileType: fileType,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$PetRecordFileTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({record = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (record) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.record,
+                                referencedTable: $$PetRecordFileTableReferences
+                                    ._recordTable(db),
+                                referencedColumn: $$PetRecordFileTableReferences
+                                    ._recordTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$PetRecordFileTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $PetRecordFileTable,
+      PetRecordFileData,
+      $$PetRecordFileTableFilterComposer,
+      $$PetRecordFileTableOrderingComposer,
+      $$PetRecordFileTableAnnotationComposer,
+      $$PetRecordFileTableCreateCompanionBuilder,
+      $$PetRecordFileTableUpdateCompanionBuilder,
+      (PetRecordFileData, $$PetRecordFileTableReferences),
+      PetRecordFileData,
+      PrefetchHooks Function({bool record})
     >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
   $$PetTableTableManager get pet => $$PetTableTableManager(_db, _db.pet);
+  $$PetRecordTableTableManager get petRecord =>
+      $$PetRecordTableTableManager(_db, _db.petRecord);
+  $$PetRecordFileTableTableManager get petRecordFile =>
+      $$PetRecordFileTableTableManager(_db, _db.petRecordFile);
 }

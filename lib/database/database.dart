@@ -18,7 +18,29 @@ class Pet extends Table {
 
 }
 
-@DriftDatabase(tables: [Pet])
+class PetRecord extends Table {
+
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get pet => integer().references(Pet, #id)();
+  TextColumn get title => text().withLength(min: 1, max:100)();
+  TextColumn get type => text().withLength(min: 1, max:100)();
+  TextColumn get subtype => text().withLength(min: 1, max:100)();
+  TextColumn get details => text().withLength(min:1)();
+  TextColumn get location => text().withLength(min: 1, max:100)();
+  DateTimeColumn get date => dateTime()();
+
+}
+
+class PetRecordFile extends Table{
+
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get record => integer().references(PetRecord, #id)();
+  TextColumn get filePath => text()();
+  TextColumn get fileType => text()();
+
+}
+
+@DriftDatabase(tables: [Pet, PetRecord, PetRecordFile])
 class AppDatabase extends _$AppDatabase {
   // After generating code, this class needs to define a `schemaVersion` getter
   // and a constructor telling drift where the database should be stored.
